@@ -16,14 +16,5 @@ function makeGalleryItemList(items) {
 }
 
 refs.gallery.insertAdjacentHTML("afterbegin", makeGalleryItemList(galleryItems));
-refs.gallery.addEventListener("click", onGalleryClick);
 
-function onGalleryClick(evt) {
-  evt.preventDefault();
-  console.log("123");
-  if (evt.target.classList.value !== "gallery__image") {
-    return;
-  } else {
-    new SimpleLightbox(".gallery a", { captionsData: "alt", captionDelay: 250 });
-  }
-}
+const simpleLightbox = new SimpleLightbox(".gallery a", { captionsData: "alt", captionDelay: 250 });
