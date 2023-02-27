@@ -24,15 +24,13 @@ refs.gallery.addEventListener("click", onGalleryClick);
 
 function onGalleryClick(evt) {
   evt.preventDefault();
+
   const modal = basicLightbox.create(`<img class="gallery__modal" src="${evt.target.dataset.source}">`);
 
   if (evt.target.classList.value !== "gallery__image") {
     return;
   } else {
     modal.show();
-  }
-
-  if (document.querySelector(".basicLightbox") !== null) {
     document.body.addEventListener(
       "keydown",
       (e) => {
