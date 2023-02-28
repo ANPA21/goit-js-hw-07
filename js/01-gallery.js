@@ -25,20 +25,34 @@ refs.gallery.addEventListener("click", onGalleryClick);
 function onGalleryClick(evt) {
   evt.preventDefault();
 
-  const modal = basicLightbox.create(`<img class="gallery__modal" src="${evt.target.dataset.source}">`);
+  const modal = basicLightbox.create(`<img class="gallery__modal" src="${evt.target.dataset.source}">`, {
+    onShow: () => {
+      document.body.addEventListener(
+        "keydown",
+        (e) => {
+          if (e.code === "Escape") {
+            modal.close();
+          }
+        },
+        { once: true }
+      );
+    },
+    onСlose: () => {
+      document.body.removeEventListener(
+        "keydown",
+        (e) => {
+          if (e.code === "Escape") {
+            modal.close();
+          }
+        },
+        { once: true }
+      );
+    },
+  });
 
   if (evt.target.classList.value !== "gallery__image") {
     return;
   } else {
     modal.show();
-    document.body.addEventListener(
-      "keydown",
-      (e) => {
-        if (e.key === "Escape") {
-          modal.close();
-        }
-      },
-      { once: true }
-    );
   }
 }
