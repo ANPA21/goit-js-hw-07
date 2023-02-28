@@ -27,29 +27,18 @@ function onGalleryClick(evt) {
 
   const modal = basicLightbox.create(`<img class="gallery__modal" src="${evt.target.dataset.source}">`, {
     onShow: () => {
-      document.body.addEventListener(
-        "keydown",
-        (e) => {
-          if (e.code === "Escape") {
-            modal.close();
-          }
-        },
-        { once: true }
-      );
+      document.body.addEventListener("keydown", onEscPress);
     },
     onСlose: () => {
-      document.body.removeEventListener(
-        "keydown",
-        (e) => {
-          if (e.code === "Escape") {
-            modal.close();
-          }
-        },
-        { once: true }
-      );
+      document.body.removeEventListener("keydown", onEscPress);
     },
   });
 
+  function onEscPress(e) {
+    if (e.code === "Escape") {
+      modal.close();
+    }
+  }
   if (evt.target.classList.value !== "gallery__image") {
     return;
   } else {
